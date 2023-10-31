@@ -1,0 +1,64 @@
+<idea-plugin>
+    <id>org.recompyle.recompyle</id>
+    <name>Recompyle</name>
+    <vendor email="recompyles@gmail.com" url="https://recompyle.com">Recompyle</vendor>
+
+    <!-- Product and plugin compatibility requirements -->
+    <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+<!--        <applicationService serviceImplementation="org.recompyle.services.CursorChangeService"/>-->
+        <applicationService serviceImplementation="org.recompyle.services.storage.ProjectStorage"/>
+        <applicationService serviceImplementation="org.recompyle.services.socket.SocketIoManagerService"/>
+        <toolWindow id="Recompyle Debug" secondary="true" icon="AllIcons.General.Modified" anchor="right"
+                    factoryClass="org.recompyle.toolWindow.DebugToolWindowFactory"/>
+    </extensions>
+
+    <applicationListeners>
+        <listener class="org.recompyle.listeners.FileSaveListener"
+                  topic="com.intellij.openapi.fileEditor.FileDocumentManagerListener"/>
+
+        <listener class="org.recompyle.listeners.AppLifecycle"
+                  topic="com.intellij.ide.AppLifecycleListener"/>
+
+        <listener class="org.recompyle.listeners.ApplicationActivation"
+                  topic="com.intellij.openapi.application.ApplicationActivationListener"/>
+        <listener class="org.recompyle.listeners.ProjectEvent"
+                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
+    </applicationListeners>
+
+    <actions>
+        <group
+                id="org.intellij.sdk.action.GroupedActions"
+                text="Recompyle"
+                popup="true"
+                icon="AllIcons.Actions.RefactoringBulb">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <action
+                    icon="AllIcons.Ide.LocalScope"
+                    id="org.recompyle.actions.SelectFile" class="org.recompyle.actions.SelectFile" text="Select File">
+            </action>
+            <action id="FollowCursor" class="org.recompyle.actions.FollowCursor" text="Follow Cursor Event">
+            </action>
+            <action id="FileSave" class="org.recompyle.actions.FileSave" text="File Save Event">
+            </action>
+            <action id="OpenedFilesListener" class="org.recompyle.actions.OpenedFilesListener"
+                    text="Opened Files Listener">
+            </action>
+            <action id="BreakpointListener" class="org.recompyle.actions.BreakpointListener" text="BreakpointListener"
+                    description="Breakpoint Listener">
+            </action>
+            <action id="SelectPort" class="org.recompyle.actions.SelectPort" text="SelectPort">
+            </action>
+        </group>
+    </actions>
+    <actions>
+        <action id="org.recompyle.actions.SelectFileMain" class="org.recompyle.actions.SelectFile"
+                text="Select File" description="Select a File in Recompyle"
+                icon="/icons/target.svg">
+            <add-to-group group-id="ToolbarRunGroup" anchor="last"/>
+        </action>
+    </actions>
+
+</idea-plugin>
