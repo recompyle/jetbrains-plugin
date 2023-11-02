@@ -25,8 +25,6 @@ public class SelectFile extends AnAction {
         Map<String, String> form = initForm("select-file", e.getData(CommonDataKeys.EDITOR));
         Logger("select file ");
         sendReq(e.getProject(), form);
-
-//        BreakpointsList.getBps();
     }
 
 

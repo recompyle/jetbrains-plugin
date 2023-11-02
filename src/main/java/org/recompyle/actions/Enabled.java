@@ -1,0 +1,26 @@
+package org.recompyle.actions;
+
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.ToggleAction;
+import org.jetbrains.annotations.NotNull;
+import org.recompyle.services.ProjectManagerService;
+import org.recompyle.services.storage.ProjectStorage;
+
+import static org.recompyle.services.DebugService.Logger;
+
+public class Enabled extends ToggleAction {
+    private final ProjectStorage pStorage = ProjectStorage.getInstance();
+
+    @Override
+    public boolean isSelected(@NotNull AnActionEvent e) {
+        Logger("Enabled " + pStorage.getConfigForActionEvent(e).config.enabled.toString());
+        return pStorage.getConfigForActionEvent(e).config.enabled;
+    }
+
+    @Override
+    public void setSelected(@NotNull AnActionEvent e, boolean state) {
+        pStorage.getConfigForActionEvent(e).config.enabled = state;
+        Logger("Enabled " + pStorage.getConfigForActionEvent(e).config.enabled.toString());
+        ProjectManagerService.init();
+    }
+}

@@ -21,8 +21,8 @@ public class CursorChangeService {
     static boolean isCaretListener = false;
 
     static public void init() {
-        System.out.println("Cursor change service init");
-        initEditorListener();
+//        System.out.println("Cursor change service init");
+//        initEditorListener();
     }
 
     static CaretListener listener = new CaretListener() {
@@ -30,7 +30,7 @@ public class CursorChangeService {
         @Override
         public void caretPositionChanged(@NotNull CaretEvent e) {
             Project project = e.getEditor().getProject();
-            if (pStorage.getConfigForProject(project).config.followCursor) {
+            if (pStorage.getConfigForProject(project).config.followCursor && pStorage.getConfigForProject(project).config.enabled) {
                 Logger("caretPositionChanged");
                 Map<String, String> form = initForm("cursor-change", e.getEditor());
                 addLinesAndColumn(form, e);

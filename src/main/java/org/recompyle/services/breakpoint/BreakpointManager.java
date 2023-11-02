@@ -15,7 +15,7 @@ public class BreakpointManager {
 
         for (int i = 0; i < openedProjects.length; i++) {
             ProjectStorage.AppConfig appConfig = pStorage.getConfigForProject(openedProjects[i]);
-            if (appConfig.config.breakpointListener) {
+            if (appConfig.config.breakpointListener && appConfig.config.enabled) {
                 breakpointsListMap.put(appConfig.ideRoot, new BreakpointsList(openedProjects[i]));
             }
         }

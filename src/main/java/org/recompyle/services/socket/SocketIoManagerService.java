@@ -33,7 +33,9 @@ public class SocketIoManagerService {
 
         for (int i = 0; i < openedProjects.length; i++) {
             ProjectStorage.AppConfig appConfig = pStorage.getConfigForProject(openedProjects[i]);
-            socketIoInstanceMap.put(appConfig.ideRoot, new SocketIoInstance(appConfig.ideRoot));
+            if (appConfig.config.enabled) {
+                socketIoInstanceMap.put(appConfig.ideRoot, new SocketIoInstance(appConfig.ideRoot));
+            }
         }
 
     }

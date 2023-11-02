@@ -31,17 +31,19 @@ public class ProjectStorage implements PersistentStateComponent<ProjectStorage> 
 
         public ProjectConfig() {
             this.port = "3101";
-            this.followCursor = false;
-            this.fileSave = true;
+            this.enabled = true;
             this.openedFilesListener = true;
             this.breakpointListener = true;
+            this.followCursor = false;
+            this.fileSave = false;
         }
 
         public String port;
-        public Boolean followCursor;
-        public Boolean fileSave;
+        public Boolean enabled;
         public Boolean openedFilesListener;
         public Boolean breakpointListener;
+        public Boolean followCursor; // will be used in future versions
+        public Boolean fileSave; // will be used in future versions
     }
 
     public static class AppConfig {
@@ -59,10 +61,40 @@ public class ProjectStorage implements PersistentStateComponent<ProjectStorage> 
     @Override
     public @Nullable ProjectStorage getState() {
         System.out.println("get state event " + this.projectConfigList.size());
-//        System.out.println("get  "+this.state.followCursor.toString());
-        return this;
+        // Filter out AppConfig instances that should not be serialized.
+        ProjectStorage stateToSerialize = new ProjectStorage();
+        for (AppConfig appConfig : this.projectConfigList) {
+            if (shouldBeSerialized(appConfig)) {
+                stateToSerialize.projectConfigList.add(appConfig);
+            }
+        }
+        return stateToSerialize.projectConfigList.isEmpty() ? null : stateToSerialize;
     }
 
+    private boolean shouldBeSerialized(AppConfig appConfig) {
+        // Check if ideRoot is not null or empty
+        if (appConfig.ideRoot == null || appConfig.ideRoot.trim().isEmpty()) {
+            return false;
+        }
+
+        // Check if at least one setting in config is not at its default value
+        ProjectConfig config = appConfig.config;
+        if (config == null) {
+            return false;
+        }
+
+        ProjectConfig pjc = new ProjectConfig();
+
+        // Assuming default values for ProjectConfig are as defined in the constructor
+        boolean isDefault = Objects.equals(config.port, pjc.port) &&
+                Objects.equals(config.enabled, pjc.enabled) &&
+                Objects.equals(config.openedFilesListener, pjc.openedFilesListener) &&
+                Objects.equals(config.breakpointListener, pjc.breakpointListener) &&
+                Objects.equals(config.followCursor, pjc.followCursor) &&
+                Objects.equals(config.fileSave, pjc.fileSave);
+
+        return !isDefault; // Serialize if not all settings are default
+    }
 
     @Override
     public void loadState(@NotNull ProjectStorage state) {
@@ -94,7 +126,6 @@ public class ProjectStorage implements PersistentStateComponent<ProjectStorage> 
             this.projectConfigList.add(appConfig);
         }
 
-
         return mAppConfig;
     }
 
@@ -107,4 +138,6 @@ public class ProjectStorage implements PersistentStateComponent<ProjectStorage> 
         return getConfigForIdeRoot(projectPath);
     }
 
+
 }
+

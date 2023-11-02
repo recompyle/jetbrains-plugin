@@ -23,7 +23,7 @@ public class OpenedFilesManagerService {
 
         for (int i = 0; i < openedProjects.length; i++) {
             ProjectStorage.AppConfig appConfig = pStorage.getConfigForProject(openedProjects[i]);
-            if (appConfig.config.openedFilesListener) {
+            if (appConfig.config.openedFilesListener && appConfig.config.enabled) {
                 Logger("add opened file listener");
                 openedFilesMapMap.put(appConfig.ideRoot,
                         new OpenedFiles(ProjectService.getProjectFromRootPath(appConfig.ideRoot)));
