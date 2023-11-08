@@ -1,5 +1,5 @@
 <!-- Plugin description -->
-# RECOMPYLE Jetbrains Plugin
+# Recompyle Jetbrains Plugin
 
 A Javascript Developer Friendly Console / Debugger.
 
