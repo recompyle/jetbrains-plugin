@@ -13,9 +13,9 @@
         <!--  will be used in future versions-->
         <!--        <applicationService serviceImplementation="org.recompyle.services.CursorChangeService"/>-->
 
-        <!--        used for debug-->
-        <!--        <toolWindow id="Recompyle Debug" secondary="true" icon="AllIcons.General.Modified" anchor="right"-->
-        <!--                    factoryClass="org.recompyle.toolWindow.DebugToolWindowFactory"/>-->
+<!--                used for debug-->
+<!--                <toolWindow id="Recompyle Debug" secondary="true" icon="AllIcons.General.Modified" anchor="right"-->
+<!--                            factoryClass="org.recompyle.toolWindow.DebugToolWindowFactory"/>-->
     </extensions>
 
     <applicationListeners>
@@ -23,8 +23,6 @@
         <!--        <listener class="org.recompyle.listeners.FileSaveListener"-->
         <!--                  topic="com.intellij.openapi.fileEditor.FileDocumentManagerListener"/>-->
 
-        <listener class="org.recompyle.listeners.AppLifecycle"
-                  topic="com.intellij.ide.AppLifecycleListener"/>
 
         <listener class="org.recompyle.listeners.ProjectEvent"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>

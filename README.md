@@ -22,14 +22,14 @@ You also need the Recompyle App.
 #### Menu > Tools  > Recompyle
 
 
-<img src="./img/jetbrains-menu.png" alt="image" width="600" height="auto">
+<img src="https://asset.recompyle.com/readme/jetbrains/jetbrains-menu.png" alt="image" width="600" height="auto">
 
 Each Jetbrains Project has its own settings.
 
 
 #### Select File icon in the toolbar at the top right
 
-<img src="./img/recompyle-icon-task-bar.png" alt="image" width="50" height="auto">
+<img src="https://asset.recompyle.com/readme/jetbrains/recompyle-icon-task-bar.png" alt="image" width="50" height="auto">
 
 
 <!-- Plugin description end -->

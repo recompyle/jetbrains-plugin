@@ -14,13 +14,13 @@ public class ProjectEvent implements ProjectManagerListener {
     public void projectOpened(@NotNull Project project) {
         ProjectManagerListener.super.projectOpened(project);
         Logger("projectOpened");
-        ProjectManagerService.updateProjects();
+        ProjectManagerService.init();
     }
 
     @Override
     public void projectClosed(@NotNull Project project) {
         ProjectManagerListener.super.projectClosed(project);
         Logger("projectClosed");
-        ProjectManagerService.updateProjects();
+        ProjectManagerService.init();
     }
 }

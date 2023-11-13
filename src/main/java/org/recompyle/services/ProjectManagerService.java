@@ -35,11 +35,11 @@ public class ProjectManagerService {
         initialized = true;
     }
 
-    public static void updateProjects() {
-        if (initialized) {
-            Logger("## ProjectManagerService updateProjects");
-            init();
-        }
-    }
+//    public static void updateProjects() {
+//        if (initialized) {
+//            Logger("## ProjectManagerService updateProjects");
+//            init();
+//        }
+//    }
 
 }
