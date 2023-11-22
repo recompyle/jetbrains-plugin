@@ -13,20 +13,24 @@
         <!--  will be used in future versions-->
         <!--        <applicationService serviceImplementation="org.recompyle.services.CursorChangeService"/>-->
 
-<!--                used for debug-->
-<!--                <toolWindow id="Recompyle Debug" secondary="true" icon="AllIcons.General.Modified" anchor="right"-->
-<!--                            factoryClass="org.recompyle.toolWindow.DebugToolWindowFactory"/>-->
+        <!--                used for debug-->
+        <!--                        <toolWindow id="Recompyle Debug" secondary="true" icon="AllIcons.General.Modified" anchor="right"-->
+        <!--                                    factoryClass="org.recompyle.toolWindow.DebugToolWindowFactory"/>-->
     </extensions>
 
     <applicationListeners>
+        <listener class="org.recompyle.listeners.ProjectEvent"
+                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
         <!--  will be used in future versions-->
         <!--        <listener class="org.recompyle.listeners.FileSaveListener"-->
         <!--                  topic="com.intellij.openapi.fileEditor.FileDocumentManagerListener"/>-->
 
-
-        <listener class="org.recompyle.listeners.ProjectEvent"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+
+    <projectListeners>
+        <listener class="org.recompyle.listeners.BreakpointListener"
+                  topic="com.intellij.xdebugger.breakpoints.XBreakpointListener"/>
+    </projectListeners>
 
     <actions>
         <group
@@ -47,14 +51,14 @@
             </action>
             <action id="BreakpointListener" class="org.recompyle.actions.BreakpointListener"
                     text="Breakpoint Listener">
-                <!--  will be used in future versions-->
-                <!--            <action id="FollowCursor" class="org.recompyle.actions.FollowCursor" text="Follow Cursor Event">-->
-                <!--            </action>-->
-                <!--            <action id="FileSave" class="org.recompyle.actions.FileSave" text="File Save Event">-->
-                <!--            </action>-->
             </action>
             <action id="Enabled" class="org.recompyle.actions.Enabled" text="Enabled">
             </action>
+            <!--  will be used in future versions-->
+            <!--            <action id="FollowCursor" class="org.recompyle.actions.FollowCursor" text="Follow Cursor Event">-->
+            <!--            </action>-->
+            <!--            <action id="FileSave" class="org.recompyle.actions.FileSave" text="File Save Event">-->
+            <!--            </action>-->
         </group>
     </actions>
     <actions>

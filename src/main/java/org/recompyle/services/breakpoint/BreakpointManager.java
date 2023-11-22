@@ -1,10 +1,17 @@
 package org.recompyle.services.breakpoint;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.xdebugger.breakpoints.XBreakpoint;
+import org.jetbrains.annotations.NotNull;
+import org.recompyle.services.ProjectService;
 import org.recompyle.services.storage.ProjectStorage;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
+import static org.recompyle.services.DebugService.Logger;
 
 public class BreakpointManager {
     static final ProjectStorage pStorage = ProjectStorage.getInstance();
@@ -22,13 +29,25 @@ public class BreakpointManager {
     }
 
     static void clearBreakpoints() {
-        breakpointsListMap.forEach((s, breakpointsList) -> {
-            breakpointsList.clearListeners();
-        });
         breakpointsListMap = new HashMap<>();
     }
 
     public static BreakpointsList getWithIdeRoot(String ideRoot) {
-        return breakpointsListMap.getOrDefault(ideRoot,null);
+        return breakpointsListMap.getOrDefault(ideRoot, null);
+    }
+
+    public static void sendUpdateWithBreakpoint(@NotNull XBreakpoint breakpoint) {
+        Logger("sendUpdateWithBreakpoint " + breakpoint.getSourcePosition().toString());
+        if (breakpoint.getSourcePosition() != null) {
+            VirtualFile file = breakpoint.getSourcePosition().getFile();
+            Project project = ProjectService.getProjectFromFile(file);
+            if (project != null) {
+                BreakpointsList bp = breakpointsListMap.get(project.getBasePath());
+                if (bp != null) {
+                    bp.updateBreakpoints();
+                }
+            }
+        }
+
     }
 }

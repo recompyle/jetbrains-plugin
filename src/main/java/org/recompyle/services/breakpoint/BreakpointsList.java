@@ -25,41 +25,14 @@ public class BreakpointsList {
     static final SocketIoManagerService socketService = SocketIoManagerService.getInstance();
     @NotNull XBreakpointManager bpMgr;
     Project project;
-    XBreakpointListener<XBreakpoint<?>> listeners;
 
     BreakpointsList(Project mProject) {
         project = mProject;
         bpMgr = XDebuggerManager.getInstance(project).getBreakpointManager();
-        initListeners();
         updateBreakpoints();
     }
 
-    void initListeners() {
-        listeners = new XBreakpointListener<XBreakpoint<?>>() {
-            @Override
-            public void breakpointAdded(@NotNull XBreakpoint<?> breakpoint) {
-                XBreakpointListener.super.breakpointAdded(breakpoint);
-                Logger("breakpointAdded");
-                updateBreakpoints();
-            }
 
-            @Override
-            public void breakpointRemoved(@NotNull XBreakpoint<?> breakpoint) {
-                XBreakpointListener.super.breakpointRemoved(breakpoint);
-                Logger("breakpointRemoved");
-                updateBreakpoints();
-            }
-
-            @Override
-            public void breakpointChanged(@NotNull XBreakpoint<?> breakpoint) {
-                XBreakpointListener.super.breakpointChanged(breakpoint);
-                Logger("breakpointChanged");
-                updateBreakpoints();
-
-            }
-        };
-        bpMgr.addBreakpointListener(listeners);
-    }
 
     public void updateBreakpoints() {
         ApplicationManager.getApplication().invokeLater(new Runnable() {
@@ -102,13 +75,6 @@ public class BreakpointsList {
 
         return null;
     }
-
-    void clearListeners() {
-        if (listeners != null) {
-            bpMgr.removeBreakpointListener(listeners);
-        }
-    }
-
 
 }
 

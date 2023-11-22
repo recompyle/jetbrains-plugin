@@ -4,6 +4,7 @@ import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import org.jetbrains.annotations.NotNull;
+//import org.recompyle.services.breakpoint.BreakpointManager;
 import org.recompyle.services.breakpoint.BreakpointManager;
 import org.recompyle.services.openedFiles.OpenedFilesManagerService;
 import org.recompyle.services.socket.SocketIoManagerService;
@@ -35,11 +36,5 @@ public class ProjectManagerService {
         initialized = true;
     }
 
-//    public static void updateProjects() {
-//        if (initialized) {
-//            Logger("## ProjectManagerService updateProjects");
-//            init();
-//        }
-//    }
 
 }

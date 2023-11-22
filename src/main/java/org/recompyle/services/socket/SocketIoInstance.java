@@ -1,11 +1,9 @@
 package org.recompyle.services.socket;
 
-import com.intellij.openapi.project.ProjectManager;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import io.socket.engineio.client.transports.WebSocket;
-import org.recompyle.services.ProjectManagerService;
 import org.recompyle.services.breakpoint.BreakpointManager;
 import org.recompyle.services.openedFiles.OpenedFilesManagerService;
 import org.recompyle.services.storage.ProjectStorage;

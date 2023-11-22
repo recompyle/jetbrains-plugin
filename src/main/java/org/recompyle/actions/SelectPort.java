@@ -25,7 +25,6 @@ public class SelectPort extends AnAction {
         String textPort = getText(e.getProject());
         Logger("SelectPort.update ");
         e.getPresentation().setText(textPort);
-        super.update(e);
     }
     
 
