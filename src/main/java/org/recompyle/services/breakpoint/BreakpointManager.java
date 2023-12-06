@@ -37,7 +37,7 @@ public class BreakpointManager {
     }
 
     public static void sendUpdateWithBreakpoint(@NotNull XBreakpoint breakpoint) {
-        Logger("sendUpdateWithBreakpoint " + breakpoint.getSourcePosition().toString());
+        Logger("sendUpdateWithBreakpoint " );
         if (breakpoint.getSourcePosition() != null) {
             VirtualFile file = breakpoint.getSourcePosition().getFile();
             Project project = ProjectService.getProjectFromFile(file);
